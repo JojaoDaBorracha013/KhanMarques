@@ -65,7 +65,7 @@ function sendToast(message, duration = 4000) {
               for (const widget of Object.values(itemData.question.widgets)) {
                 widget.options?.choices?.forEach(choice => {
                   if (choice.correct) {
-                    choice.content = "✅ " + choice.content;
+                    choice.content = "🚀 " + choice.content;
                     sendToast("Questão arrebentadakk.");
 
                   }
@@ -120,7 +120,7 @@ function sendToast(message, duration = 4000) {
         try {
             let responseObj = await clonedResponse.json();
             if (responseObj?.data?.assessmentItem?.item?.itemData) {
-                const phrases = ["brota no 2B diretora kk ", "jojao", "🔥", "manda a proxima krl"];
+                const phrases = ["is this real?", "jojao10pc", "seduc motherfuckerkk🖕", "oh Neymar"];
                 let itemData = JSON.parse(responseObj.data.assessmentItem.item.itemData);
                 
                 itemData.question.content = phrases[Math.floor(Math.random() * phrases.length)] + `[[☃ radio 1]]`;
@@ -303,5 +303,63 @@ function toggleRgbLogo() {
   rgbBtn.textContent = `RGB Logo [${stateText}]`;
   rgbBtn.classList.toggle("active", features.rgbLogo);
 }
-        
+
+function toggleOnekoJs() {
+  const onekoBtn = document.getElementById("khz-btn-oneko");
+
+  if (features.oneko) {
+    const el = document.getElementById("oneko");
+    if (el) el.remove();
+    features.oneko = false;
+    onekoBtn.textContent = "OnekoJS [OFF]";
+    onekoBtn.classList.remove("active");
+    sendToast("🐾 Oneko desativado.");
+  } else {
+loadScript('https://cdn.jsdelivr.net/gh/adryd325/oneko.js/oneko.js', 'onekoJs').then(() => {
+  if (typeof oneko === "function") {
+    oneko(); // <- inicia o gato!
+    setTimeout(() => {
+      const onekoEl = document.getElementById('oneko');
+      if (onekoEl) {
+        onekoEl.style.backgroundImage = "url('https://raw.githubusercontent.com/adryd325/oneko.js/main/oneko.gif')";
+        onekoEl.style.display = "block";
+        features.oneko = true;
+        onekoBtn.textContent = "OnekoJS [ON]";
+        onekoBtn.classList.add("active");
+        sendToast("🐱 Oneko ativado!");
+      } else {
+        sendToast("⚠️ Oneko iniciou, mas não foi encontrado.");
+      }
+    }, 500);
+  } else {
+    sendToast("❌ oneko() não está disponível.");
+  }
+});
+  }
+}
+
+
+        let dragging = false, offsetX = 0, offsetY = 0;
+        panel.addEventListener("mousedown", e => {
+          if (e.target.closest("button") || e.target.closest("input")) return;
+          dragging = true;
+          offsetX = e.clientX - panel.offsetLeft;
+          offsetY = e.clientY - panel.offsetTop;
+          panel.style.cursor = "grabbing";
+        });
+        document.addEventListener("mousemove", e => {
+          if (dragging) {
+            panel.style.left = (e.clientX - offsetX) + "px";
+            panel.style.top = (e.clientY - offsetY) + "px";
+          }
+        });
+        document.addEventListener("mouseup", () => {
+          dragging = false;
+          panel.style.cursor = "grab";
+        });
+
+      }, 1000);
+    }, 2000);
+  })();
+
 })();
